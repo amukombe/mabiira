@@ -1,0 +1,14 @@
+<% @page_title = 'Select | Branch' %>
+<header class="hero-unit" style="font-size:12px;padding:0px;"><%= pluralize(@branches.size, "Branch") %> available | <%= link_to 'Back', {:controller=>'main', :action=>'index'}%></header>
+Please choose branch
+<div class="hero-unit" style="font-size:12px;background:#ffcccc;margin:10px;">
+	<div style="text-align:center;margin-bottom:20px;">
+		<%= image_tag(@sellerID.url) %>
+	</div>
+	<% @branches.each do |branch| %>
+	
+		<div class="btn" style="width:200px;">
+			<%= link_to branch.branch_name, :controller=>'products', :action=>'index', :branch_id=>branch.id %>
+		</div>
+	<%end%>
+</div>

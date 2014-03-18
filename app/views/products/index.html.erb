@@ -1,0 +1,54 @@
+<div class="depot_form" >
+	<% @page_title='Available Products' %>
+	<div>
+		<%= pluralize(@products.size, "Item") %> available 
+		<%= link_to 'New product' , new_product_path %> | <%= link_to 'Back', :controller=>'sellers', :action=>'branch', :seller_id=>@branch.seller.id %>
+	</div>
+	
+	<fieldset>
+	<h3>Listing products</h3>
+	<table class="table table-striped" style="font-size:14px;width:auto;">
+		<tr style="font-weight:bold;">
+			<td>NAME</td>
+			<td>SELLER</td>
+			<td>PRICE</td>
+			<td>AVAILABILITY</td>
+			<td>ACTION</td>
+		</tr>
+		<% @products.each do |product| %>
+		<tr class=" <%= cycle('list_line_odd' , 'list_line_even' ) %>" style="background:#ccc;" >
+			<td>
+				<%= product.title %>
+			</td>
+			<td>			
+				<%= product.seller.name %>
+			</td>
+			<td>
+				<%= product.price %>
+			</td>
+		<td style="color:green;"><%= product.availability ? 'Available' : 'Unavailable' %>
+
+		</td>
+		<td class="list_actions" >
+			<% if session[:role] == 'Manager' %>
+		      <% if product.availability %>	        
+		        <%= link_to 'Remove', {:action=>'status_remove', :id=>product.id}, :confirm=>'Are you sure you want to remove this product?', :style=>"color:red;" %>
+		      <% else %>
+		        <%= link_to 'Enable', {:action=>'status_add', :id=>product.id}, :confirm=>'Are you sure you want avail this product?', :style=>"color:red;" %>
+		      <%end%>
+	    <%end%>
+	    </td>
+	    <td class="list_actions" >		
+		<%= link_to 'show', product %> |
+		<%= link_to 'Edit' , edit_product_path(product) %> |
+		<%= link_to 'Destroy' , product,
+		:confirm => 'Are you sure?' ,
+		:method => :delete %>
+		</td>
+		</tr>
+		<% end %>
+	</table>
+	</fieldset>
+</div>
+<br />
+

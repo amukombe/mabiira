@@ -1,0 +1,25 @@
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+
+      <ul>
+      <% @item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= f.hidden_field(:order_id, :value=>@order.id) %>
+  </div>
+  <div>
+    <%= f.hidden_field(:seller_id, :value=>@line_items.product.seller.id) %>
+  </div>
+  <div>
+    <%= f.hidden_field(:branch_id, :value=>@order.branch_id) %>
+  </div>
+  <div class="actions">
+    <%= submit_tag 'submit order', :class=>'btn btn-medium btn-info' %>
+  </div>
+<% end %>

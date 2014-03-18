@@ -1,0 +1,63 @@
+<%@page_title='Order description'%>
+<p id="notice"><%= notice %></p>
+<p style="font-weight:bold;">
+  <%= @line_items.product.seller.name %>, <%= @order.branch.branch_name %>
+</p>
+<p>
+  <b>Name:</b>
+  <%= @order.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @order.address %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @order.email %>
+</p>
+
+<p>
+  <b>Pay type:</b>
+  <%= @order.pay_type %>
+</p>
+<p>
+  
+  <table>
+  <tr>
+      <th>
+         Quantity       
+      </th>
+      <th>
+         Item 
+      </th>
+      <th>
+        Total price/Item
+      </th>
+    </tr>
+  <% @order.line_items.each do |item| %>   
+    <tr>
+      <td>
+        <%= item.quantity %>&times;
+      </td>
+      <td class="item_price">
+        <%= item.product.title %>
+      </td>
+      <td class="item_price"><%= sprintf("Ush %0.1f",item.total_price) %></td>
+    </tr>
+    <% end %>
+    <tr>
+      <td>
+        
+      </td>
+      <td class="item_price", style="border-top:1px solid black; border-top-style:dotted; font-weight:bold;">
+        Total
+      </td>
+      <td class="item_price", style="border-top:1px solid black; border-top-style:dotted; font-weight:bold;">
+         <%= @order.order_total %>
+      </td>
+    </tr>
+  </table>
+</p>
+<%= link_to 'Back', orders_path %>

@@ -1,0 +1,33 @@
+<%@page_title='Welcome to Mabira'%>
+<% if @cart.line_items.empty? %>
+
+	<% if notice %>
+		<div id="error_explanation">
+			<%= notice %>
+		</div>
+	<% end %>
+
+	<h2>Welcome to your MABIRA Shopping store</h2>
+	<div style="margin-bottom:10px; color:green; font-style:italic; font-weight:bold;">
+	Please choose your favourite place to start shopping
+	</div>
+	<% @sellers.each do |seller| %>
+	<div id="manage-supermarkets">
+	<%= link_to image_tag(seller.url), :controller=>'store', :action=>'branch',:seller_id=>seller %> 
+	</div>
+	<% end %>
+<%else%>
+	<%
+		@seller_cart = LineItem.find_by_cart_id(@cart)
+	    seller = @seller_cart.product.seller_id
+	    @seller=Seller.find_by_id(seller)
+	%>
+	<h1>Welcome to your Market store</h1>
+	<div style="margin-bottom:10px; color:green; font-style:italic; font-weight:bold;">
+	Continue shopping at <%= @seller.name %> or by items in cart to start again
+	</div>
+	<div id="manage-supermarkets">
+		<%= link_to image_tag(@seller.url), :controller=>'store', :action=>'branch',:seller_id=>@seller.id %>
+	</div>
+
+<%end%>

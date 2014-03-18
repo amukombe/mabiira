@@ -1,0 +1,14 @@
+<% @page_title='Available Sellers' %>
+<div>
+	<div class="span12" style="margin-top:10px;">
+		
+			
+			<% @sellers.each do |seller| %>
+				<div class="span3" style="float:left;border:1px solid #ccc;height:120px;margin-bottom:10px;margin-left:0px;margin-right:10px;padding:10px;text-align:center;">
+					<%= link_to image_tag(seller.url) ,{:controller=>'sellers', :action=>'branch', :seller_id=>seller.id} %>					
+				</div>
+			<%end%>
+			
+		
+	</div>
+</div>

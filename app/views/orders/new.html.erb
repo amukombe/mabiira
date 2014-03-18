@@ -1,0 +1,13 @@
+<% @page_title = 'Complete Order' %>
+
+<div class="depot_form" >
+	<h4>Please Enter Your Details</h4>
+	<fieldset>
+		
+			<div style="color:green;font-weight:bold;">
+			<%= @line_item.product.seller.name + ' ' + @line_item.product.branch.branch_name + ' branch' %>
+			</div>
+		
+		<%= render 'form' %>
+	</fieldset>
+</div>

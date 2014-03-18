@@ -1,0 +1,11 @@
+<% @page_title = 'Edit | Product' %>
+<div class="depot_form" >
+	<fieldset>
+		<h3>Editing product</h3>
+
+		<%= render 'form' %>
+
+		<%= link_to 'Show', @product %> |
+		<%= link_to 'Back', :controller=>'sellers', :action=>'display' %>
+	</fieldset>
+</div>
